@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ខ្លាខ្លោក</title>
+    <style>
+        body {
+            width: 700px;
+            margin: 0 auto;
+        }
+
+        img {
+            margin: 10px;
+        }
+
+        #btnRun {
+            border: 1px solid black;
+            border-radius: 15px;
+            padding-left: 10px;
+            padding-right: 10px;
+
+        }
+
+        div {
+            margin: 15px;
+        }
+
+        #bottom,
+        #top {
+            border: 1px solid black;
+            border-radius: 25px;
+        }
+
+        .txtMoney {
+            width: 30px;
+            text-align: center;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: auto auto auto;
+            background-color: #2196F3;
+            padding: 10px;
+        }
+
+        .grid-item {
+            background-color: rgba(49, 47, 47, 0.6);
+            border: 1px solid rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            font-size: 30px;
+            text-align: center;
+            border-radius: 20px;
+        }
+
+        .border-balance {
+            background-color: #2196F3;
+            border: 1px solid rgba(0, 0, 0, 0.8);
+            padding: 10px;
+            font-size: 22px;
+            text-align: center;
+            border-radius: 20px;
+            width: 300px;
+            color: white;
+
+        }
+    </style>
+    <script>
+        var kls = ["k_1.png", "k_2.png", "k_3.png", "k_4.png", "k_5.png", "k_6.png"];
+        var check = false;
+        var balance = 1000;
+        var betMoney = 0;
+        var win1, win2, win3;
+        function setRandomImage() {
+            win1 = getRandomNum(0, kls.length - 1);
+            win2 = getRandomNum(0, kls.length - 1);
+            win3 = getRandomNum(0, kls.length - 1);
+            document.getElementById("kl1").src = "../klaklouk/assets/" + kls[win1];
+            document.getElementById("kl2").src = "../klaklouk/assets/" + kls[win2];
+            document.getElementById("kl3").src = "../klaklouk/assets/" + kls[win3];
+            if (check) {
+                setTimeout("setRandomImage()", 100);
+            }
+            document.getElementById("balance").innerHTML = balance - betMoney
+
+        }
+        function getRandomNum(min, max) {
+            return min + Math.floor(Math.random() * (max - min + 1));
+        }
+
+        function runImage() {
+            if (check) {
+                check = false;
+                document.getElementById("btnRun").value = "ចាប់ផ្តើម"
+                //alert(betMoney)
+                //alert(win1+","+win2+","+win3)
+                getWinner()
+                clearInput()
+            } else {
+                check = true;
+                document.getElementById("btnRun").value = "ឈប់"
+                setRandomImage();
+            }
+        }
+        function clearInput(){
+            document.getElementById("value1").value = 0;
+            document.getElementById("value2").value = 0;
+            document.getElementById("value3").value = 0;
+            document.getElementById("value4").value = 0;
+            document.getElementById("value5").value = 0;
+            document.getElementById("value6").value = 0;
+        }
+        function getWinner(){
+            if(parseInt(document.getElementById("value1").value) > 0){
+                    if(win1 == 0){
+                        balance += parseInt(document.getElementById("value1").value) * 2
+                    }
+                    if(win2 == 0){
+                        balance += parseInt(document.getElementById("value1").value) * 2
+                    }
+                    if(win3 == 0){
+                        balance += parseInt(document.getElementById("value1").value) * 2
+                    }
+                }
+                if(parseInt(document.getElementById("value2").value) > 0){
+                    if(win1 == 1){
+                        balance += parseInt(document.getElementById("value2").value) * 2
+                    }
+                    if(win2 == 1){
+                        balance += parseInt(document.getElementById("value2").value) * 2
+                    }
+                    if(win3 == 1){
+                        balance += parseInt(document.getElementById("value2").value) * 2
+                    }
+                }
+                if(parseInt(document.getElementById("value3").value) > 0){
+                    if(win1 == 2){
+                        balance += parseInt(document.getElementById("value3").value) * 2
+                    }
+                    if(win2 == 2){
+                        balance += parseInt(document.getElementById("value3").value) * 2
+                    }
+                    if(win3 == 2){
+                        balance += parseInt(document.getElementById("value3").value) * 2
+                    }
+                }
+                if(parseInt(document.getElementById("value4").value) > 0){
+                    if(win1 == 3){
+                        balance += parseInt(document.getElementById("value4").value) * 2
+                    }
+                    if(win2 == 3){
+                        balance += parseInt(document.getElementById("value4").value) * 2
+                    }
+                    if(win3 == 3){
+                        balance += parseInt(document.getElementById("value4").value) * 2
+                    }
+                }
+                if(parseInt(document.getElementById("value5").value) > 0){
+                    if(win1 == 4){
+                        balance += parseInt(document.getElementById("value5").value) * 2
+                    }
+                    if(win2 == 4){
+                        balance += parseInt(document.getElementById("value5").value) * 2
+                    }
+                    if(win3 == 4){
+                        balance += parseInt(document.getElementById("value5").value) * 2
+                    }
+                }
+                if(parseInt(document.getElementById("value6").value) > 0){
+                    if(win1 == 5){
+                        balance += parseInt(document.getElementById("value6").value) * 2
+                    }
+                    if(win2 == 5){
+                        balance += parseInt(document.getElementById("value6").value) * 2
+                    }
+                    if(win3 == 5){
+                        balance += parseInt(document.getElementById("value6").value) * 2
+                    }
+                }
+
+        }
+        function increaseValue(value) {
+            if (betMoney < balance) {
+                document.getElementById("value" + value).value = parseInt(document.getElementById("value" + value).value) + 100;
+                betMoney += 100;
+                document.getElementById("balance").innerHTML = balance - betMoney
+            }
+
+        }
+        function decreaseValue(value) {
+            if (parseInt(document.getElementById("value" + value).value) > 0) {
+                document.getElementById("value" + value).value = parseInt(document.getElementById("value" + value).value) - 100;
+                betMoney -= 100
+                document.getElementById("balance").innerHTML = balance - betMoney
+            }
+        }
+    </script>
+</head>
+
+<body onload="setRandomImage()">
+    <center>
+        <h2>ល្បែងខ្លាខ្លោក</h2>
+        <div class="blance-acc">
+            <div class="border-balance">
+                <p>Your balance : <span id="balance">10000</span></p4>
+            </div>
+            <div id="img-run">
+                <img src="../klaklouk/assets/k_1.png" id="kl1">
+                <img src="../klaklouk/assets/k_2.png" id="kl2">
+                <img src="../klaklouk/assets/k_3.png" id="kl3">
+            </div>
+
+        </div>
+        <div>
+            <input type="button" id="btnRun" value="ចាប់ផ្តើម" onclick="runImage()" />
+        </div>
+        <div id="bottom" class="grid-container">
+            <div class="grid-item">
+                <img src="../klaklouk/assets/k_1.png">
+                <div class="txtGroupMoney">
+                    <input type="button" value="-" onclick="decreaseValue('1')">
+                    <input type="text" value="0" class="txtMoney" id="value1">
+                    <input type="button" value="+" onclick="increaseValue('1')">
+                </div>
+            </div>
+            <div class="grid-item">
+                <img src="../klaklouk/assets/k_2.png">
+                <div class="txtGroupMoney">
+                    <input type="button" value="-" onclick="decreaseValue('2')">
+                    <input type="text" value="0" class="txtMoney" id="value2">
+                    <input type="button" value="+" onclick="increaseValue('2')">
+                </div>
+            </div>
+            <div class="grid-item">
+                <img src="../klaklouk/assets/k_3.png">
+                <div class="txtGroupMoney">
+                    <input type="button" value="-" onclick="decreaseValue('3')">
+                    <input type="text" value="0" class="txtMoney" id="value3">
+                    <input type="button" value="+" onclick="increaseValue('3')">
+                </div>
+            </div>
+            <div class="grid-item">
+                <img src="../klaklouk/assets/k_4.png">
+                <div class="txtGroupMoney">
+                    <input type="button" value="-" onclick="decreaseValue('4')">
+                    <input type="text" value="0" class="txtMoney" id="value4">
+                    <input type="button" value="+" onclick="increaseValue('4')">
+                </div>
+            </div>
+            <div class="grid-item">
+                <img src="../klaklouk/assets/k_5.png">
+                <div class="txtGroupMoney">
+                    <input type="button" value="-" onclick="decreaseValue('5')">
+                    <input type="text" value="0" class="txtMoney" id="value5">
+                    <input type="button" value="+" onclick="increaseValue('5')">
+                </div>
+            </div>
+            <div class="grid-item">
+                <img src="../klaklouk/assets/k_6.png">
+                <div class="txtGroupMoney">
+                    <input type="button" value="-" onclick="decreaseValue('6')">
+                    <input type="text" value="0" class="txtMoney" id="value6">
+                    <input type="button" value="+" onclick="increaseValue('6')">
+                </div>
+            </div>
+        </div>
+    </center>
+</body>
+
+</html>
